@@ -16,8 +16,9 @@ type Config struct {
 }
 
 type ProviderConfig struct {
-	Port    int           `yaml:"port"`
+	Port    int           `yaml:"port" env-required:"true"`
 	Timeout time.Duration `yaml:"timeout"`
+	Name    string        `yaml:"name" env-required:"true"`
 }
 
 func LoadConfig() *Config {

@@ -1,26 +1,24 @@
 package main
 
 import (
+	"TgBot/config"
 	"context"
-	"github.com/go-telegram/bot"
-	"github.com/go-telegram/bot/models"
 	"os"
 	"os/signal"
+
+	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
 )
 
-var b *bot.Bot
-
 func main() {
+	cfg := config.LoadConfig()
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 	opts := []bot.Option{
 		bot.WithDefaultHandler(handler),
 	}
-	key, err := os.ReadFile("key.txt")
-	if err != nil {
-		panic(err)
-	}
-	b, err = bot.New(string(key), opts...)
+
+	b, err := bot.New(cfg.TelegramToken, opts...)
 	if err != nil {
 		panic(err)
 	}
