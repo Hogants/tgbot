@@ -16,7 +16,7 @@ type Config struct {
 }
 
 type ProviderConfig struct {
-	Port    int           `yaml:"port" env-required:"true"`
+	Target  string        `yaml:"target" env-required:"true"`
 	Timeout time.Duration `yaml:"timeout"`
 	Name    string        `yaml:"name" env-required:"true"`
 }
